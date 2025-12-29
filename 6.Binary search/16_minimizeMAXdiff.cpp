@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define int long long
+
+int arr[100100];
+int n, k;
+
+bool check(int maxDiffAllowed) {
+    
+}
+
+signed main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+
+    int testcases;
+    cin >> testcases;
+
+    while (testcases--) {
+        cin >> n >> k;
+        for (int i = 0; i < n; i++) {
+            cin >> arr[i];
+        }
+
+        int low = 1, high = 1e9;
+        int ans = high;
+
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            if (check(mid)) {
+                ans = mid;
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+
+        cout << ans << "\n";
+    }
+}

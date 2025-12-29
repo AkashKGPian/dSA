@@ -1,0 +1,120 @@
+                                    //WORNG
+
+
+//topological ordering in DAG
+//directed
+
+// Global “visited” prevents exploring all paths
+// You mark a node vis[node]=1 and never revisit it. That means if there are two different 
+// incoming paths to the same node, you’ll only explore whichever one you hit first, 
+// and you’ll ignore any potentially longer path that arrives later.
+
+/*Inefficient DFS (No Memoization):
+
+You're doing a DFS from every node, which is fine in theory, but you don’t cache (memoize) the results of the subproblems.
+
+In a DAG, many paths can share suffixes. Without memoization, you recompute paths multiple times, leading to redundant computation and possibly TLE (Time Limit Exceeded) on large inputs.
+
+No Cycle Check:
+
+While your input might be assumed to be a DAG, your code doesn't verify this. If a cycle sneaks in, it can lead to infinite recursion (stack overflow).*/
+
+
+
+
+
+
+
+
+// GPT CODE
+
+#include <bits/stdc++.h>
+using namespace std;
+
+// Graph adjacency list
+vector<vector<int>> g;
+
+int maxPath = 0;
+
+void dfs(int node, int path) {
+    maxPath = max(maxPath, path); // update maxPath at entry
+    for (int v : g[node]) {
+        dfs(v, path + 1); // correctly increment path
+    }
+}
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    int n, m;
+    cin >> n >> m;
+
+    g.resize(n + 1);
+
+    for (int i = 0; i < m; i++) {
+        int a, b;
+        cin >> a >> b;
+        g[a].push_back(b);
+    }
+
+    for (int i = 1; i <= n; i++) {
+        dfs(i, 0); // start DFS from each node
+    }
+
+    cout << maxPath << '\n';
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+//my code
+
+
+// #include <bits/stdc++.h>
+// using namespace std;
+
+// vector<vector<int>> g;
+// vector<int> vis;
+// int maxPath;
+
+// void dfs(int node,int path){
+//     vis[node]=1;
+//     for(auto v : g[node]){
+//         if(!vis[v]){
+//             dfs(v,path++);
+//         }
+//     }
+//     maxPath=max(maxPath,path);
+// }
+
+// int main() {
+//     ios_base::sync_with_stdio(0);
+//     cin.tie(0);
+//     cout.tie(0);
+//     int n,m;
+//     cin>>n>>m;
+//     g.resize(n+1);
+//     vis.assign(n+1,0);
+//     for(int i=1;i<=m;i++){
+//         int a,b;
+//         cin>>a>>b;
+//         g[a].push_back(b);
+//     }
+//     for(int i=1;i<=n;i++){
+//         if(!vis[i]){
+//             dfs(i,0);
+//         }
+//     }
+//     cout<<maxPath;
+//     return 0;
+// }

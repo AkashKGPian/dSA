@@ -1,6 +1,13 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+// S . . . . #
+// # # # # . #
+// # # # # . #
+// # # # # . #
+// # # # . . #
+// # # . . . #
+// # E . . . #
 using state=pair<int,int>;
 #define f first
 #define s second

@@ -25,10 +25,8 @@ int rec(int r, int c){
     //up and left
     // transitions
     int ans = 0;
-    if (r > 0 && arr[r-1][c] != '#')
-        ans += rec(r-1, c);
-    if (c > 0 && arr[r][c-1] != '#')
-        ans += rec(r, c-1);
+    
+    
     //save and return 
     return dp[r][c]=ans;
 }

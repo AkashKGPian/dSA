@@ -6,49 +6,45 @@ int n,m;
 int dp[3010][3010];
 int back[3010][3010];
 
-int rec(int l1, int l2){
+int rec(int i, int j){
     //pruning
     //base case
-    if(l1==n || l2==m)return 0;
+    if(i==n || j==m)return 0;
     //cache check
-    if(dp[l1][l2]!=-1){
-        return dp[l1][l2];
+    if(dp[i][j]!=-1){
+        return dp[i][j];
     }
     //transitions
     int ans=0;
-    if(l1<n){
-        if(rec(l1+1,l2)>ans){
-            ans=rec(l1+1,l2);
-            back[l1][l2]=1;//only updating this back for the max rec(l1,l2+1) and not for every other case
-        }
+    if(rec(i+1,j)>ans){
+        ans=rec(i+1,j);
+        back[i][j]=1;//only updating this back for the max rec(i,j+1) and not for every other case
     }
-    if(l1<n){
-        if(rec(l1,l2+1)>ans){
-            ans=rec(l1,l2+1);
-            back[l1][l2]=2;//thats why we have used the above if condn
-        }
+    if(rec(i,j+1)>ans){
+        ans=rec(i,j+1);
+        back[i][j]=2;//thats why we have used the above if condn
     }
-    if(l1<n && l2<m && s[l1]==t[l2]){
-        if(1+rec(l1+1,l2+1)>ans){
-            ans=1+rec(l1+1,l2+1);
-            back[l1][l2]=0;
+    if(s[i]==t[j]){
+        if(1+rec(i+1,j+1)>ans){
+            ans=1+rec(i+1,j+1);
+            back[i][j]=0;
         }
     }
     //save and return 
-    return dp[l1][l2]=ans;
+    return dp[i][j]=ans;
 }
 
-void generate(int l1, int l2){
+void generate(int i, int j){
     //base case
-    if(l1==n || l2==m)return;
-    int ch = back[l1][l2];
+    if(i==n || j==m)return;
+    int ch = back[i][j];
     if(ch==0){
-        cout<<s[l1];
-        generate(l1+1,l2+1);
+        cout<<s[i];
+        generate(i+1,j+1);
     }else if(ch==1){
-        generate(l1+1,l2);
+        generate(i+1,j);
     }else{
-        generate(l1,l2+1);
+        generate(i,j+1);
     }
 }
 

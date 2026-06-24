@@ -10,8 +10,8 @@ int rec(int level, int Wleft){//from [level to n-1] how many ways u have to make
     //pruning
     //base case
     if(level==n){//from n to n-1
-        if(Wleft==0)return 1;
-        else return 0;
+        if(Wleft==0)return 0;
+        else return -1e9;//impossible case
     }
     //cache check
     if(dp[level][Wleft]!=-1){

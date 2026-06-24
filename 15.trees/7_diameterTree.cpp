@@ -44,6 +44,6 @@ int main(){
             maxChild=j;
         }
     }
-    cout<<depth-[maxChild];//diameter
+    cout<<depth[maxChild];//diameter
     return 0;
 }

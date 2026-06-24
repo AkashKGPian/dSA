@@ -1,0 +1,93 @@
+Here is a **clean, plain-text, copy-pastable version** suitable for a `.txt` file (no Markdown syntax required):
+
+---
+
+In the context of the problem **"Number of Substrings Containing All Three Characters"**, the answer is **no**, you cannot simply use:
+
+ans += head - tail + 1
+
+The reason lies in exactly *what* you are counting. In sliding window problems, these two formulas count fundamentally different things.
+
+-----------------------------------------
+
+1. ans += n - head  (Counting Forward)
+
+-----------------------------------------
+
+This formula is used when you want to count substrings that **contain at least** a certain set of characters.
+
+Logic:
+Once the window [tail ... head] is valid, any character you add to the right side will keep it valid.
+
+Example:
+In the string "abcabc", if your window is "abc" (indices 0 to 2), then the following substrings are all valid:
+
+abc
+abca
+abcab
+abcabc
+
+There are (n - head) such substrings starting at index `tail`.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+
+
+2. ans += head - tail + 1  (Counting Backward)
+
+---
+
+This formula is used when you want to count **all possible substrings** within the current window. It is commonly used for problems like:
+
+"Count substrings with at most K distinct characters."
+
+Logic:
+This adds the number of new substrings that *end* at the current `head`.
+
+Example:
+If your window is "abc", this formula adds 3 substrings:
+
+"c"
+"bc"
+"abc"
+
+The problem:
+In this specific question, "c" and "bc" are NOT valid because they do not contain 'a' and 'b'. Using this formula would incorrectly count invalid substrings.
+
+---
+
+## Comparison
+
+Formula:        ans += n - head
+Counts:         Substrings starting at `tail` and ending at or after `head`
+Use case:       "At least" problems (must contain A, B, and C)
+
+Formula:        ans += head - tail + 1
+Counts:         Substrings ending at `head` and starting at or after `tail`
+Use case:       "At most" problems (e.g., at most K distinct characters)
+
+---
+
+## Summary
+
+If you use:
+
+ans += head - tail + 1
+
+in an "at least" problem, you will count every small substring inside your window, including invalid ones like "a" or "ab" that do not meet the requirement.
+
+To use backward counting for an "at least" problem, you would need extra logic to subtract invalid substrings — which makes the solution more complex.
+
+That is why using:
+
+ans += n - head
+
+is the correct and simpler approach for this problem.
+
+---
+
+If you want, I can also provide:
+
+* A minimal explanation version
+* A LeetCode-style comment block
+* A Java / Python code snippet with inline explanation

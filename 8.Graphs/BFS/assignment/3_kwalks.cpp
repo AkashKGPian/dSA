@@ -4,7 +4,7 @@ using state = pair<int,int>;
 const int INF = 1e9;
 #define f first 
 #define s second 
-zxhgx
+
 //defining ds
 int dx[]={2,1,-1,-2,-2,-1,1,2};
 int dy[]={-1,-2,-2,-1,1,2,2,1};

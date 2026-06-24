@@ -12,12 +12,14 @@ vector<int> topo;
 
 void kahn(){
     queue<int> q;
+    //push all nodes with indegree 0 in the queue
     for(int i=1;i<=n;i++){
         if(indeg[i]==0)q.push(i);
     }
+    //keep on popping from the queue and reducing the indegree of its neighbours
     while(!q.empty()){
-        int curr = q.front();
-        q.pop();
+        int curr = q.front(); q.pop();
+        
         topo.push_back(curr);
         for(auto neigh : g[curr]){
             indeg[neigh]--;

@@ -7,13 +7,14 @@ int main() {
     cout.tie(0);
     int n,l;
     cin>>n>>l;
-    int arr[n];
+    vector<int> arr;
+    arr.resize(n);
 
     for(int i=0;i<n;i++){
         cin>>arr[i];
     }
     // [1,1,2,6,7,8,9,11]
-    sort(arr,arr+n);
+    sort(arr.begin(),arr.end());
 
     int lo=0,hi=n-1;
     int ans=-1;

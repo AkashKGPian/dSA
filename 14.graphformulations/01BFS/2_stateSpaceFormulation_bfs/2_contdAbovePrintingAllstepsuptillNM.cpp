@@ -41,11 +41,11 @@ void bfs(pair<int,int> st){
     
     dist[st.f][st.s][0]=0;
     //since simple bfs
-    queue<state> dq;
-    dq.push({st,0});
+    queue<state> q;
+    q.push({st,0});
     
-    while(!dq.empty()){
-        state curr = dq.front(); dq.pop();
+    while(!q.empty()){
+        state curr = q.front(); q.pop();
         if(vis[curr.f.f][curr.f.s][curr.s] == 1) continue;
         vis[curr.f.f][curr.f.s][curr.s] = 1;
         
@@ -58,7 +58,7 @@ void bfs(pair<int,int> st){
                 if(nw>k) continue;//cannot break more than k walls
                 if(dist[nx][ny][nw] > dist[curr.f.f][curr.f.s][curr.s]+1){
                     dist[nx][ny][nw] = dist[curr.f.f][curr.f.s][curr.s]+1;
-                    dq.push({{nx,ny}, nw});
+                    q.push({{nx,ny}, nw});
                 }
             }
         }
@@ -68,7 +68,7 @@ void bfs(pair<int,int> st){
 
 
 int main(){
-    cin>>n>>m>>k;
+    cin>>n>>m;
     arr.resize(n);
     
     pair<int,int> st,en;
